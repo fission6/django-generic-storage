@@ -3,6 +3,7 @@ Generic Storage Class for Django
 
 Control Django Storage per Model Field based on Settings Configuration
 
+```
 from django.conf import settings
 from django.utils.module_loading import import_string
 from django.utils.deconstruct import deconstructible
@@ -45,7 +46,9 @@ class GenericStorage(object):
         storage_backend = self.get_storage_from_settings()
         return get_storage_class(storage_backend)()
 
------
+```
+
+```
 settings
 
 STORAGES = {
@@ -57,7 +60,8 @@ STORAGES = {
     }
 }
 
-----
+```
+```
 storages
 from storages.backends.s3boto3 import S3Boto3Storage
 
@@ -80,9 +84,10 @@ class PrivateMediaStorage(S3Boto3Storage):
     location = 'media'
     querystring_expire = 60 * 60
     region_name = 'us-west-2'
+```
 
-
------
+```
 example
 
 document = models.FileField(upload_to,...,storage=GenericStorage('public-media'))
+```
